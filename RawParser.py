@@ -66,7 +66,11 @@ def getLegalRecords(inFile):
                         #info = line.split("Wavelength")[0].split("Plate:")[1].split()
                         #print(line.strip(r","))
                         #tmp_info = line.rstrip().strip(r",").split("Plate:")[1].split()
-                        tmp_info = line.split("Unnamed")[0].split("-Wavelength")[0].rstrip().strip(",").rstrip().split("Plate:")[1].split()
+                        #tmp_info = line.split("Unnamed")[0].split("-Wavelength")[0].rstrip().strip(",").rstrip().split("Plate:")[1].split()
+                        # '-Wavelength' and '- Wavelength' should be recognized without difference
+                        tmp_info = line.split("Unnamed")[0].split("Wavelength")[0].rstrip().strip(",").rstrip().split("Plate:")[1].split()
+                        if '-' in tmp_info:
+                            tmp_info.remove('-')
                         #print(tmp_info)
                         if len(tmp_info) != 5:
                             tempHead = "#".join(tmp_info)
